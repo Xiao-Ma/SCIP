@@ -69,4 +69,24 @@
         ((= kinds-of-coins 4) 25)
         ((= kinds-of-coins 5) 50)))
 
+;******************************************************************************
+;Exponentiation
+;(1) recursive
+(define (expt b n)
+  (if (= n 0)
+      1
+      (* b (expt b (- n 1)))))
 
+;(2) iterative
+(define (expt b n)
+  (expt-iter b n 1))
+(define (expt-iter b counter product)
+  (if (= counter 0)
+      product
+      (expt-iter b (- counter 1) (* b product))))
+      
+;(3) a faster way by square the product: time O(log(n))
+(define (fast-expt b n)
+  (cond ((= n 0) 1)
+        ((even? n) (square (fast-expt b (/ n 2))))
+        (else (* b (fast-expt b (- n 1))))))
